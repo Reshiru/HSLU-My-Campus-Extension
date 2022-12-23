@@ -18,14 +18,14 @@ const MAPPING_TABLE_TEMPLATE = {
     [NAME_PROJECT_MODULES]: [0, []],
     [NAME_EXTENDED_MODULES]: [0, []],
     [NAME_ADDITIONAL_MODULES]: [0, []],
-    [NAME_INTENSIVE_MODULES]: [0, []],
-}
+};
+
 const MODULE_SHORT_REGEX = /\((.*?)\)/g;
 const MODULE_SHORT_REGEX_API = /\_(.*?)\./g;
 
 const PREV_MODULE_DECLARATIONS_MAP = [
     [x => x.includes("Artificial" && "Intelligence"), x => x.includes("I.BA_MLPW."), NAME_CORE_MODULES],
-    [x => x.includes("Artificial" && "Intelligence"), x => x.includes("I.BA_OOP_E.F2201"), NAME_EXTENDED_MODULES],
+    [x => x.includes("Artificial" && "Intelligence"), x => x.includes("I.BA_OOP_E.F2201" || "I.BA_OOP_E.F2202"), NAME_EXTENDED_MODULES],
     [x => x.includes("Artificial" && "Intelligence"), x => x.includes("I.BA_REUF"), NAME_ADDITIONAL_MODULES],
 ];
 
