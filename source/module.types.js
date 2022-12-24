@@ -40,11 +40,11 @@ const getDataSource = () => window.jsBridge.options.dataSourceId;
 String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
 function () {
     "use strict";
-    var str = this.toString();
+    let str = this.toString();
     if (arguments.length) {
-        var t = typeof arguments[0];
-        var key;
-        var args = ("string" === t || "number" === t) ?
+        let t = typeof arguments[0];
+        let key;
+        let args = ("string" === t || "number" === t) ?
             Array.prototype.slice.call(arguments)
             : arguments[0];
 
@@ -56,6 +56,31 @@ function () {
     return str;
 };
 
+String.prototype.levenshteinDistance =  String.prototype.levenshteinDistance || function(b) {
+    "use strict";
+    let a = this.toString();
+    // Create a two-dimensional array to store the distances between the substrings of a and b
+    const distance = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
+  
+    // Set the distance of the first row and column to the index of the corresponding element
+    for (let i = 0; i <= a.length; i++) {
+      distance[0][i] = i;
+    }
+    for (let j = 0; j <= b.length; j++) {
+      distance[j][0] = j;
+    }
+  
+    // Calculate the distance for each pair of substrings
+    for (let j = 1; j <= b.length; j++) {
+      for (let i = 1; i <= a.length; i++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        distance[j][i] = Math.min(distance[j][i - 1] + 1, distance[j - 1][i] + 1, distance[j - 1][i - 1] + cost);
+      }
+    }
+  
+    // Return the distance of the last element
+    return distance[b.length][a.length];
+};
 
 function loadAvailableBachelors() {
     console.log("loadAvailableBachelors");
